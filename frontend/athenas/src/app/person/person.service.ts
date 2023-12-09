@@ -16,7 +16,7 @@ export class PersonService {
   }
 
   list(): Observable<Person[]> {
-    return this.httpClient.get<Person[]>(`${this.baseURL}/${this.endpoint}`);
+    return this.httpClient.get<Person[]>(`${this.baseURL}/${this.endpoint}/`);
   }
 
   create(person: Person): Observable<Person>{
@@ -38,5 +38,5 @@ export class PersonService {
   getIdealWeight(id: number): Observable<any> {
     return this.httpClient.get(`${this.baseURL}/${this.endpoint}/${id}/ideal-weight`);
   }
-  
+
 }

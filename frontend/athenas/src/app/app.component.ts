@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { NavComponent } from './nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PersonService } from './person/person.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule, 
     NavComponent,
     HttpClientModule
+  ],
+  providers: [
+    PersonService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
