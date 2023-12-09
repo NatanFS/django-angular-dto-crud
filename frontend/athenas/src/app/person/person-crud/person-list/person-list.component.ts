@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class PersonListComponent implements OnInit{
   persons$: Observable<Person[]>;
-  displayedColumns = ['id', 'name', 'weight', 'height'];
+  displayedColumns = ['id', 'name', 'sex', 'weight', 'height', 'birth_date', 'cpf',];
 
   constructor(
     private personService: PersonService,
