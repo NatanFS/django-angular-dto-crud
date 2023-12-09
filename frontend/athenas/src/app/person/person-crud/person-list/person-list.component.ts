@@ -30,7 +30,7 @@ export class PersonListComponent implements OnInit{
 
 
   onPersonClick(row: any){
-    this.router.navigateByUrl('/person/' + row.id);
+    this.router.navigateByUrl('/persons/' + row.id);
   }
 
 }
