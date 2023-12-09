@@ -11,24 +11,30 @@ class PersonTask:
         return filterset.qs
 
     @staticmethod
-    def create(dto):
-        person = PersonDTO.dto_to_model(dto)
+    def create(person_dto):
+        person = PersonDTO.dto_to_model(person_dto)
         person.save()
         return person
     
     @staticmethod
-    def update(dto):
-        person = PersonTask.get_by_id(dto.id)
-        serializer = PersonSerializer(instance=person, data=dto.to_dict(), partial=True)
+    def update(person_dto):
+        person = PersonTask.get_by_id(person_dto.id)
+        serializer = PersonSerializer(instance=person, data=person_dto.to_dict(), partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return person
 
     @staticmethod
-    def get_by_id(id):
-        return Person.objects.get(id=id)
+    def get_by_id(person_id):
+        return Person.objects.get(id=person_id)
 
     @staticmethod
-    def delete(dto):
-        person = Person.objects.get(id=dto.id)
+    def delete(person_id):
+        person = Person.objects.get(id=person_id)
         person.delete()
+    
+    @staticmethod
+    def get_ideal_weight(person_id):
+        person = PersonTask.get_by_id(person_id)
+        return person.ideal_weight
+

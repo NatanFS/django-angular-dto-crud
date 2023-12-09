@@ -30,11 +30,14 @@ class PersonService:
 
     @staticmethod
     def delete(person_id):
-        person_dto = PersonService.get_by_id(person_id)
-        PersonTask.delete(person_dto)
+        PersonTask.delete(person_id)
     
     @staticmethod
     def get_by_id(person_id):
         person = PersonTask.get_by_id(person_id)
         return PersonDTO.model_to_dto(person)
+
+    def get_ideal_weight(person_id):
+        ideal_weight = PersonTask.get_ideal_weight(person_id)
+        return ideal_weight
     

@@ -21,10 +21,10 @@ class PersonModelTestCase(TestCase):
         )
 
     def test_calculate_ideal_weight_male(self):
-        self.assertEqual(self.person_male.calculate_ideal_weight, (72.7 * 1.80) - 58)
+        self.assertEqual(float(self.person_male.ideal_weight), 72.86)
 
     def test_calculate_ideal_weight_female(self):
-        self.assertEqual(self.person_female.calculate_ideal_weight, (62.1 * 1.65) - 44.7)
+        self.assertEqual(float(self.person_female.ideal_weight), 57.77)
     
     def test_invalid_cpf_field(self):
         self.person = baker.make(

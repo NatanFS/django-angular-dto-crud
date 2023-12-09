@@ -49,3 +49,9 @@ class PersonViewSetTests(APITestCase):
         response = self.client.delete(f'{self.endpoint}{self.person.id}/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Person.objects.count(), 0)
+
+    def test_ideal_weight(self):
+        self.person = baker.make('person.Person', name='Maria', weight=60.0, height=1.65)
+        response = self.client.get(f'{self.endpoint}{self.person.id}/ideal-weight/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(float(response.data['ideal_weight']), 61.95)

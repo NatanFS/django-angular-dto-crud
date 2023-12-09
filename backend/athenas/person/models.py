@@ -1,6 +1,6 @@
 from django.db import models
 from person.validators import validate_cpf
-
+from decimal import Decimal
 # Create your models here.
 class Person(models.Model):
 
@@ -16,10 +16,10 @@ class Person(models.Model):
     weight = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Weight', null=False)
 
     @property
-    def calculate_ideal_weight(self):
+    def ideal_weight(self):
         ideal_weight = 0
         if self.sex == self.Sex.MASCULINE:
-            ideal_weight = (72.7 * self.height) - 58
+            ideal_weight = (72.7 * float(self.height)) - 58
         elif self.sex == self.Sex.FEMININE:
-            ideal_weight = (62.1 * self.height) - 44.7
-        return ideal_weight
+            ideal_weight = (62.1 * float(self.height)) - 44.7
+        return round(Decimal(ideal_weight), 2)

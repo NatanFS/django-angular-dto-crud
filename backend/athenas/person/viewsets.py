@@ -56,4 +56,9 @@ class PersonViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=True, url_path='ideal-weight')
     def ideal_weight(self, request, *args, **kwargs):
-        pass
+        try:
+            person_id = kwargs.get('pk')
+            ideal_weight = PersonService.get_ideal_weight(person_id)
+            return Response(data={'ideal_weight': ideal_weight}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

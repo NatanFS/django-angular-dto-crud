@@ -69,5 +69,5 @@ class PersonTaskTests(TestCase):
             weight=70.0,
         )
         
-        PersonTask.delete(dto)
+        PersonTask.delete(dto.id)
         self.assertEqual(Person.objects.count(), 0)
