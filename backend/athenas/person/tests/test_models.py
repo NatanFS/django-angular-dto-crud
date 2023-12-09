@@ -1,7 +1,8 @@
 from django.test import TestCase
-from .models import Person
+from person.models import Person
 from model_bakery import baker
 from django.core.exceptions import ValidationError
+
 
 class PersonModelTestCase(TestCase):
     def setUp(self):
