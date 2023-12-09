@@ -1,4 +1,3 @@
-from person.models import Person
 from person.serializers import PersonSerializer
 
 class PersonDTO:
