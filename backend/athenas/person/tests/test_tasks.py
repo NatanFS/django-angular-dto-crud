@@ -33,6 +33,7 @@ class PersonTaskTests(TestCase):
         )
         person = PersonTask.create(dto)
         self.assertIsInstance(person, Person)
+        self.assertEqual(Person.objects.count(), 1)
 
     def test_update(self):
         person = baker.make('person.Person', name='João')
