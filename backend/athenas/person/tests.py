@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import Person
 from model_bakery import baker
+from django.core.exceptions import ValidationError
 
 class PersonModelTestCase(TestCase):
     def setUp(self):
@@ -23,3 +24,10 @@ class PersonModelTestCase(TestCase):
 
     def test_calculate_ideal_weight_female(self):
         self.assertEqual(self.person_female.calculate_ideal_weight, (62.1 * 1.65) - 44.7)
+    
+    def test_invalid_cpf_field(self):
+        self.person = baker.make(
+            'person.Person',
+            cpf='12345678a',
+        )
+        self.assertRaises(ValidationError, self.person.full_clean)
