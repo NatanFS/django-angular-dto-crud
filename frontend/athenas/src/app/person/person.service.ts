@@ -28,6 +28,7 @@ export class PersonService {
   }
 
   update(person: Person): Observable<Person> {
+    console.log(person)
     return this.httpClient.put<Person>(`${this.baseURL}/${this.endpoint}/${person.id}/`, person);
   }
 
@@ -36,7 +37,7 @@ export class PersonService {
   }
 
   getIdealWeight(id: number): Observable<any> {
-    return this.httpClient.get(`${this.baseURL}/${this.endpoint}/${id}/ideal-weight`);
+    return this.httpClient.get(`${this.baseURL}/${this.endpoint}/${id}/ideal-weight/`);
   }
 
 }
