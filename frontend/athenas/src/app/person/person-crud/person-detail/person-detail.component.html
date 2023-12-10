@@ -25,7 +25,7 @@
     <div>
         <mat-form-field>
             <mat-label>CPF</mat-label>
-            <input matInput formControlName="cpf">
+            <input matInput formControlName="cpf"  type="number" maxlength="11" (keypress)="onlyNumbers($event)">
         </mat-form-field>
     </div>
     <div>

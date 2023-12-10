@@ -1,4 +1,49 @@
 <div class="container">
+    <mat-toolbar>Pesquisa de Pessoa</mat-toolbar>
+    <form *ngIf="searchForm" [formGroup]="searchForm" (ngSubmit)="listPersons()" novalidate class="search-form">
+        <div class="field-container">
+            <mat-form-field class="search-field">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div class="field-container">
+            <mat-form-field class="search-field">
+            <mat-label>CPF</mat-label>
+            <input matInput formControlName="cpf" type="number">
+            </mat-form-field>
+        </div>
+    
+        <div class="field-container">
+            <mat-form-field class="search-field">
+            <mat-label>Altura</mat-label>
+            <input matInput formControlName="height" type="number">
+            </mat-form-field>
+        </div>
+    
+        <div class="field-container">
+            <mat-form-field class="search-field">
+            <mat-label>Peso</mat-label>
+            <input matInput formControlName="weight" type="number">
+            </mat-form-field>
+        </div>
+
+        <div class="field-container">
+            <mat-form-field class="search-field">
+            <mat-label>Sexo</mat-label>
+            <input matInput formControlName="sex">
+            </mat-form-field>
+        </div>
+    
+        <div class="button-container">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!searchForm.valid">Pesquisar</button>
+        </div>
+            
+    </form>
+</div>
+
+<div class="container">
     <mat-toolbar>Lista de Pessoas</mat-toolbar>
 
     <div *ngIf="persons$ | async as persons; else loading">

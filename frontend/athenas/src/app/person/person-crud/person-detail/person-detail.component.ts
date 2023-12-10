@@ -115,4 +115,13 @@ export class PersonDetailComponent implements OnInit{
     });
   }
 
+  onlyNumbers(e: any) {
+    let charCode = e.charCode ? e.charCode : e.keyCode;
+    if (charCode != 8 && charCode != 9) {
+      let max = 11;      
+      if ((charCode < 48 || charCode > 57)||(e.target.value.length >= max)) return false;
+    }
+    return true
+  }
+
 }

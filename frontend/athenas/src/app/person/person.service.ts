@@ -40,4 +40,21 @@ export class PersonService {
     return this.httpClient.get(`${this.baseURL}/${this.endpoint}/${id}/ideal-weight/`);
   }
 
+  search(criteria: any): Observable<Person[]> {
+    let params = new HttpParams();
+    Object.keys(criteria).forEach(key => {
+      if (criteria[key]) {
+        params = params.set(key, criteria[key]);
+      }
+    });
+
+    return this.httpClient.get<Person[]>(`${this.baseURL}/${this.endpoint}/`, { params })
+      .pipe(
+        catchError(error => {
+          console.error('Error during search:', error);
+          throw error;
+        })
+      );
+  }
+
 }

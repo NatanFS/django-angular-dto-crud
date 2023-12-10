@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { Person } from '../../person.model';
 import { PersonService } from '../../person.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-person-list',
@@ -13,11 +14,22 @@ export class PersonListComponent implements OnInit{
   persons$: Observable<Person[]>;
   displayedColumns = ['id', 'name', 'sex', 'weight', 'height', 'birth_date', 'cpf',];
 
+  searchForm: FormGroup;
+
   constructor(
+    private formBuilder: FormBuilder,
     private personService: PersonService,
     private router: Router
   ) {
     this.persons$ = this.personService.list();
+    this.searchForm = this.formBuilder.group({
+      name: [''],
+      sex: [''],
+      weight: [''],
+      height: [''],
+      birth_date: [''],
+      cpf: [''],
+    });
   }
   
   ngOnInit() {
@@ -25,8 +37,17 @@ export class PersonListComponent implements OnInit{
   }
 
   listPersons() {
-    this.persons$ = this.personService.list();
+    const searchParams = this.searchForm.value;
+    
+    this.persons$ = this.personService.search(searchParams)
+      .pipe(
+        catchError(error => {
+          alert("Ocorreu um erro ao buscar pessoas." + JSON.stringify(error));
+          throw error;
+        })
+      );
   }
+
 
 
   onPersonClick(row: any){
